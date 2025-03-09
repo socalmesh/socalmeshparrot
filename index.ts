@@ -69,8 +69,7 @@ if (process.env.RBL_JSON_URL) {
   });
 }
 
-const mqttBrokerUrl = "mqtt://mqtt.meshtastic.org"; // the original project took a nose dive, so this server is trash
-const basymeshMqttBrokerUrl = "mqtt://mqtt.bayme.sh";
+const mqttBrokerUrl = "mqtt://mqtt.socalmesh.org";
 const mqttUsername = "meshdev";
 const mqttPassword = "large4cats";
 
@@ -251,7 +250,7 @@ const baWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
 const baMsWebhookUrl = process.env.DISCORD_MS_WEBOOK_URL;
 const svWebhookUrl = process.env.SV_DISCORD_WEBHOOK_URL;
 
-const mesh_topic = process.env.MQTT_TOPIC || "msh/US/bayarea";
+
 const grouping_duration = parseInt(process.env.GROUPING_DURATION || "10000");
 
 function sendDiscordMessage(webhookUrl: string, payload: any) {
@@ -344,18 +343,18 @@ const createDiscordMessage = async (packetGroup, text) => {
     // console.log("maxHopStart", maxHopStart);
 
     const content = {
-      username: "Mesh Bot",
+      username: "SoCalMesh Parrot",
       avatar_url:
-        "https://cdn.discordapp.com/app-icons/1240017058046152845/295e77bec5f9a44f7311cf8723e9c332.png",
+        "https://cdn.discordapp.com/avatars/1292336040790724690/03c725a48b2f304c2c44f119a1111ff4.webp",
       embeds: [
         {
-          url: `https://meshview.rouvier.org/packet_list/${packet.from}`,
+          url: `https://meshview.socalmesh.org/packet_list/${packet.from}`,
           color: 6810260,
           timestamp: new Date(packet.rxTime * 1000).toISOString(),
 
           author: {
             name: `${nodeInfos[nodeIdHex] ? nodeInfos[nodeIdHex].longName : "Unknown"}`,
-            url: `https://meshview.rouvier.org/packet_list/${packet.from}`,
+            url: `https://meshview.socalmesh.org/packet_list/${packet.from}`,
             icon_url: avatarUrl,
           },
           title: `${nodeInfos[nodeIdHex] ? nodeInfos[nodeIdHex].shortName : "UNK"}`,
@@ -372,7 +371,7 @@ const createDiscordMessage = async (packetGroup, text) => {
             // },
             {
               name: "Packet",
-              value: `[${packetGroup.id.toString(16)}](https://meshview.rouvier.org/packet/${packetGroup.id})`,
+              value: `[${packetGroup.id.toString(16)}](https://meshview.socalmesh.org/packet/${packetGroup.id})`,
               inline: true,
             },
             {
@@ -435,7 +434,7 @@ const createDiscordMessage = async (packetGroup, text) => {
 
                 return {
                   name: `Gateway`,
-                  value: `[${gatewayDisplaName} (${hopText})](https://meshview.rouvier.org/packet_list/${nodeHex2id(envelope.gatewayId.replace("!", ""))})${gatewayDelay > 0 ? " (" + gatewayDelay + "ms)" : ""}`,
+                  value: `[${gatewayDisplaName} (${hopText})](https://meshview.socalmesh.org/packet_list/${nodeHex2id(envelope.gatewayId.replace("!", ""))})${gatewayDelay > 0 ? " (" + gatewayDelay + "ms)" : ""}`,
                   inline: true,
                 };
               }),
@@ -489,23 +488,17 @@ const createDiscordMessage = async (packetGroup, text) => {
 //   password: mqttPassword,
 // });
 
-const baymesh_client = mqtt.connect(basymeshMqttBrokerUrl, {
+const baymesh_client = mqtt.connect(mqttBrokerUrl, {
   username: mqttUsername,
   password: mqttPassword,
 });
 
 const ba_home_topics = [
-  "msh/US/bayarea",
-  "msh/US/BayArea",
-  "msh/US/CA/bayarea",
-  "msh/US/CA/BayArea",
+  "msh/US/CA/socalmesh",
 ];
 
 const sv_home_topics = [
-  "msh/US/sacvalley",
-  "msh/US/SacValley",
-  "msh/US/CA/sacvalley",
-  "msh/US/CA/SacValley",
+  "msh/US/CA/sandiegocounty",
 ];
 
 // home_topics is both ba and sv

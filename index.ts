@@ -495,10 +495,11 @@ const baymesh_client = mqtt.connect(mqttBrokerUrl, {
 
 const ba_home_topics = [
   "msh/US/CA/socalmesh",
+  "msh/US/CA/sandiegocounty",
 ];
 
 const sv_home_topics = [
-  "msh/US/CA/sandiegocounty",
+  "msh/US/CA/meow",
 ];
 
 // home_topics is both ba and sv

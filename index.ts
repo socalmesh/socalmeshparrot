@@ -348,13 +348,13 @@ const createDiscordMessage = async (packetGroup, text) => {
         "https://cdn.discordapp.com/avatars/1292336040790724690/03c725a48b2f304c2c44f119a1111ff4.webp",
       embeds: [
         {
-          url: `https://meshview.socalmesh.org/packet_list/${packet.from}`,
+          url: `https://meshview.w4hac.com/packet_list/${packet.from}`,
           color: 6810260,
           timestamp: new Date(packet.rxTime * 1000).toISOString(),
 
           author: {
             name: `${nodeInfos[nodeIdHex] ? nodeInfos[nodeIdHex].longName : "Unknown"}`,
-            url: `https://meshview.socalmesh.org/packet_list/${packet.from}`,
+            url: `https://meshview.w4hac.com/packet_list/${packet.from}`,
             icon_url: avatarUrl,
           },
           title: `${nodeInfos[nodeIdHex] ? nodeInfos[nodeIdHex].shortName : "UNK"}`,
@@ -371,7 +371,7 @@ const createDiscordMessage = async (packetGroup, text) => {
             // },
             {
               name: "Packet",
-              value: `[${packetGroup.id.toString(16)}](https://meshview.socalmesh.org/packet/${packetGroup.id})`,
+              value: `[${packetGroup.id.toString(16)}](https://meshview.w4hac.com/packet/${packetGroup.id})`,
               inline: true,
             },
             {
@@ -434,7 +434,7 @@ const createDiscordMessage = async (packetGroup, text) => {
 
                 return {
                   name: `Gateway`,
-                  value: `[${gatewayDisplaName} (${hopText})](https://meshview.socalmesh.org/packet_list/${nodeHex2id(envelope.gatewayId.replace("!", ""))})${gatewayDelay > 0 ? " (" + gatewayDelay + "ms)" : ""}`,
+                  value: `[${gatewayDisplaName} (${hopText})](https://meshview.w4hac.com/packet_list/${nodeHex2id(envelope.gatewayId.replace("!", ""))})${gatewayDelay > 0 ? " (" + gatewayDelay + "ms)" : ""}`,
                   inline: true,
                 };
               }),
